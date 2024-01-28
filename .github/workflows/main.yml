@@ -1,0 +1,39 @@
+name: Python Script CI
+
+on:
+  schedule:
+    - cron: '0 5 * * *' 
+  # push:
+  #   branches:
+  #     - main  # Change 'main' to your default branch name if needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can choose another supported OS if needed
+    env:
+      MY_EMAIL: ${{ secrets.MY_EMAIL }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      SEND_ADDRESS: ${{ secrets.SEND_ADDRESS }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This action checks out your repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # This action sets up Python
+      with:
+        python-version: 3.11  # Choose the Python version you want to use
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Python script
+      run: python main.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config user.email "${{ secrets.MY_EMAIL }}"
+        git config user.name "GitHub Actions"
+        git add date_log.txt  # Replace with the actual path to your log file
+        git add trades_checked.txt
+        git commit -m "Update log file"
+        git push
