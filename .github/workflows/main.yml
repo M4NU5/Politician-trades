@@ -1,11 +1,11 @@
 name: Python Script CI
 
 on:
-  schedule:
-    - cron: '0 5 * * *' 
-  # push:
-  #   branches:
-  #     - main  # Change 'main' to your default branch name if needed
+  # schedule:
+  #   - cron: '0 5 * * *' 
+  push:
+    branches:
+      - master  # Change 'main' to your default branch name if needed
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
 
     - name: Commit and Push Changes
       run: |
-        git config user.email "${{ secrets.MY_EMAIL }}"
+        git config user.email "GitHub.Actions"
         git config user.name "GitHub Actions"
         git add date_log.txt  # Replace with the actual path to your log file
         git add trades_checked.txt

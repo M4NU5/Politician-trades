@@ -3,6 +3,7 @@
 Insider Trading Alerts is a Python script that scrapes insider trading information from [CapitolTrades](https://www.capitoltrades.com/) and sends email alerts based on specified criteria.
 
 This script has been cloned from: https://github.com/cjk268/Insider-Trading-Alerts.git 
+
 I have applied my own edits and changes
 
 ## Features
