@@ -1,4 +1,4 @@
-name: Politician Trades Daily Execution
+name: Politician Trades Daily
 on:
   # schedule:
   #   - cron: '0 5 * * *' 
