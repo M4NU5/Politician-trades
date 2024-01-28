@@ -1,5 +1,4 @@
-name: Python Script CI
-
+name: Politician Trades Daily Execution
 on:
   schedule:
     - cron: '0 5 * * *' 
@@ -28,14 +27,12 @@ jobs:
         MY_EMAIL: ${{ secrets.MY_EMAIL }}
         PASSWORD: ${{ secrets.PASSWORD }}
         SEND_ADDRESS: ${{ secrets.SEND_ADDRESS }}
-    - name: Configure Git
+    
+    - name: Commit Changes 
       run: |
         git config --global user.name 'GitHubActions'
         git config --global user.email 'GitHubActions@gmail.com'
-
-    - name: Push Changes
-      run: |
-        git remote add target_repo https://github.com/M4NU5/Politician-trades.git
-        git push target_repo test
+        git commit -am "Automated logging"
+        git push
       env:
         GIT_AUTH_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}

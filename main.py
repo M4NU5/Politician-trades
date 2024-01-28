@@ -20,7 +20,7 @@ RECENT = 45  # Adjust the value as needed (in Days)
 MIN_TRADE_SIZE = 15000  # Adjust the value as needed (in USD)
 MIN_OR_MAX_RANGE = 1  # Set to 0 if the user wants to use min range, 1 if max range is wanted.
 
-URL = "https://www.capitoltrades.com/trades?per_page=100"
+URL = "https://www.capitoltrades.com/trades?per_page=96"
 HEADER = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
