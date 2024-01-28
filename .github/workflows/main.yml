@@ -1,8 +1,8 @@
 name: Python Script CI
 
 on:
-  # schedule:
-  #   - cron: '0 5 * * *' 
+  schedule:
+    - cron: '0 5 * * *' 
   push:
     branches:
       - master  # Change 'main' to your default branch name if needed
@@ -10,10 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # You can choose another supported OS if needed
-    env:
-      MY_EMAIL: ${{ secrets.MY_EMAIL }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      SEND_ADDRESS: ${{ secrets.SEND_ADDRESS }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2  # This action checks out your repository
@@ -28,12 +24,18 @@ jobs:
 
     - name: Run Python script
       run: python main.py
-
-    - name: Commit and Push Changes
+      env:
+        MY_EMAIL: ${{ secrets.MY_EMAIL }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        SEND_ADDRESS: ${{ secrets.SEND_ADDRESS }}
+    - name: Configure Git
       run: |
-        git config user.email "GitHub.Actions"
-        git config user.name "GitHub Actions"
-        git add date_log.txt  # Replace with the actual path to your log file
-        git add trades_checked.txt
-        git commit -m "Update log file"
-        git push
+        git config --global user.name 'GitHubActions'
+        git config --global user.email 'GitHubActions@gmail.com'
+
+    - name: Push Changes
+      run: |
+        git remote add target_repo https://github.com/M4NU5/Politician-trades.git
+        git push target_repo test
+      env:
+        GIT_AUTH_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
